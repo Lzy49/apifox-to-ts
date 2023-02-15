@@ -1,0 +1,963 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "api-gateway",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/web/user/center/card/info": {
+      "get": {
+        "summary": "获取用户卡片信息",
+        "x-apifox-folder": "web/user/center",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "web/user/center"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "token",
+            "required": false,
+            "example": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJjdHgiOiI3MDVmNmQyMDI1YTNlMWVmNjQzNDRlMzMyMzUxNDA3OWIxOWU0NWU2NmY4YzY4ODNjZmY3MTE5ZjBhOGVlYjFmMDM5Y2RmNmI1M2U4Mzc5NGUzNmZkZTk4NTAxMzhkYTM1MTg4YTU5MzViMmJkNjJhNzhlMDNlMGM5OGNmMWQyMTliY2IxYjlhYTJhNWZiMWY2MDAwOWI1ZmY2MDZkZTZmIiwiaWF0IjoxNjU0MDUyMDc3LCJleHAiOjE2NTkyMzYwNzcsImp0aSI6InFTTW92d1RvTFJGWExJWXYifQ.Q9q0UbLuByyyIKYIGdmh8P0jsx4W86nzKZ93xPF3Jezt4Y7GMXd4gAboRqMa_E43PHd31zFFP58ss2NfsPqXC3HV1H1WaavRG56Hihde1pGwExxq0movS0MYp3K_poo9PcoqPvkJzMSBb-ATt64hGLteMxHPG4QM_PSqleyFAW8",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Cookie",
+            "in": "header",
+            "description": "",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "userId": {
+                          "type": "string",
+                          "description": "用户手机号、或者邮箱、或者Uid（兼容旧版本）"
+                        },
+                        "userType": {
+                          "type": "string",
+                          "description": "固定为attendee（兼容旧版本）"
+                        },
+                        "properties": {
+                          "type": "object",
+                          "properties": {
+                            "hash": {
+                              "type": "string",
+                              "description": "用户哈希"
+                            },
+                            "uid": {
+                              "type": "string",
+                              "description": "用户uid （请求推荐系统那边使用）"
+                            },
+                            "intId": {
+                              "type": "integer",
+                              "description": "用户数字id"
+                            },
+                            "avatar": {
+                              "type": "string",
+                              "description": "头像"
+                            },
+                            "email": {
+                              "type": "string",
+                              "description": "邮箱 （这里显示的是用户卡片的邮箱和登录用的邮箱不一样）"
+                            },
+                            "phone": {
+                              "type": "string",
+                              "description": "手机号 （这里显示的是用户卡片的手机号和登录用的手机号不一样）"
+                            },
+                            "biography": {
+                              "type": "string",
+                              "description": "个人简介"
+                            },
+                            "company": {
+                              "type": "string",
+                              "description": "所属公司"
+                            },
+                            "department": {
+                              "type": "string",
+                              "description": "所属部门"
+                            },
+                            "jobTitle": {
+                              "type": "string",
+                              "description": "职位"
+                            },
+                            "firstName": {
+                              "type": "string",
+                              "description": "姓"
+                            },
+                            "lastName": {
+                              "type": "string",
+                              "description": "名字"
+                            },
+                            "nickname": {
+                              "type": "string",
+                              "description": "昵称"
+                            },
+                            "country": {
+                              "type": "string",
+                              "description": "国家"
+                            },
+                            "looking_for": {
+                              "type": "string",
+                              "description": "感兴趣的"
+                            },
+                            "weChatNumber": {
+                              "type": "string",
+                              "description": "微信号"
+                            },
+                            "linkInNumber": {
+                              "type": "string",
+                              "description": "领英号"
+                            },
+                            "linkedin_home": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "hash",
+                            "uid",
+                            "intId",
+                            "avatar",
+                            "email",
+                            "phone",
+                            "biography",
+                            "company",
+                            "department",
+                            "jobTitle",
+                            "firstName",
+                            "lastName",
+                            "nickname",
+                            "country",
+                            "looking_for",
+                            "weChatNumber",
+                            "linkInNumber",
+                            "linkedin_home"
+                          ],
+                          "x-apifox-orders": [
+                            "hash",
+                            "uid",
+                            "intId",
+                            "avatar",
+                            "email",
+                            "phone",
+                            "biography",
+                            "company",
+                            "department",
+                            "jobTitle",
+                            "firstName",
+                            "lastName",
+                            "nickname",
+                            "country",
+                            "looking_for",
+                            "weChatNumber",
+                            "linkInNumber",
+                            "linkedin_home"
+                          ],
+                          "description": "基本信息属性",
+                          "x-apifox-ignore-properties": []
+                        },
+                        "labels": {
+                          "type": "object",
+                          "properties": {},
+                          "x-apifox-orders": [],
+                          "description": "标签（兼容旧版本）",
+                          "x-apifox-ignore-properties": []
+                        },
+                        "similarUsers": {
+                          "type": "object",
+                          "properties": {},
+                          "x-apifox-orders": [],
+                          "description": "兼容旧版本",
+                          "x-apifox-ignore-properties": []
+                        },
+                        "autoReply": {
+                          "type": "boolean",
+                          "description": "固定为false，兼容旧版本"
+                        },
+                        "viewed": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "兼容旧版本"
+                        },
+                        "bookmarkedNodes": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "兼容旧版本"
+                        },
+                        "bookmarkedUsers": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "兼容旧版本"
+                        },
+                        "bookmarkedBy": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "兼容旧版本"
+                        },
+                        "userPermissions": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "兼容旧版本"
+                        }
+                      },
+                      "required": [
+                        "userId",
+                        "userType",
+                        "properties",
+                        "labels",
+                        "similarUsers",
+                        "autoReply",
+                        "viewed",
+                        "bookmarkedNodes",
+                        "bookmarkedUsers",
+                        "bookmarkedBy",
+                        "userPermissions"
+                      ],
+                      "x-apifox-orders": [
+                        "userId",
+                        "userType",
+                        "properties",
+                        "labels",
+                        "similarUsers",
+                        "autoReply",
+                        "viewed",
+                        "bookmarkedNodes",
+                        "bookmarkedUsers",
+                        "bookmarkedBy",
+                        "userPermissions"
+                      ],
+                      "x-apifox-ignore-properties": []
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "next": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "data",
+                    "message",
+                    "next"
+                  ],
+                  "x-apifox-orders": [
+                    "code",
+                    "data",
+                    "message",
+                    "next"
+                  ],
+                  "x-apifox-ignore-properties": []
+                },
+                "examples": {
+                  "1": {
+                    "summary": "成功示例 ",
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "userId": "6b161743-45ff-457a-9a93-7508f96f985d",
+                        "userType": "attendee",
+                        "properties": {
+                          "hash": "YqBmlwVvoqwLdDVo",
+                          "uid": "6b161743-45ff-457a-9a93-7508f96f985d",
+                          "intId": 12440,
+                          "avatar": "https://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83eqia9KXa82AVQaopdYt1pEibpIvLPXiaTcod3XTqWDQJ3XfGoqgg7lG4zgBIWK7a6fXqEiaSpyhBf8d1A/132",
+                          "email": "",
+                          "phone": "015210233451",
+                          "biography": "",
+                          "company": "",
+                          "department": "",
+                          "jobTitle": "",
+                          "firstName": "正超",
+                          "lastName": "华",
+                          "nickname": "",
+                          "country": "",
+                          "looking_for": "",
+                          "weChatNumber": "",
+                          "linkInNumber": "YqBmlwVvoqwLdDVo",
+                          "linkedin_home": ""
+                        },
+                        "labels": {},
+                        "similarUsers": {},
+                        "autoReply": false,
+                        "viewed": null,
+                        "bookmarkedNodes": null,
+                        "bookmarkedUsers": null,
+                        "bookmarkedBy": null,
+                        "userPermissions": null
+                      },
+                      "message": "success",
+                      "next": 0
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "baseURL": "https://gotin-test.oss-accelerate.aliyuncs.com"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CodeBaseInfo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "kind": {
+            "type": "string"
+          },
+          "desc": {
+            "type": "string"
+          },
+          "stock": {
+            "type": "integer"
+          }
+        },
+        "x-apifox-orders": [
+          "name",
+          "kind",
+          "desc",
+          "stock"
+        ],
+        "required": [
+          "name",
+          "kind",
+          "desc",
+          "stock"
+        ],
+        "x-apifox-ignore-properties": [],
+        "x-apifox-folder": ""
+      },
+      "NotifyInfo": {
+        "type": "object",
+        "properties": {
+          "notify_hash": {
+            "type": "string",
+            "description": "公告hash"
+          },
+          "event_hash": {
+            "type": "string",
+            "description": "活动hash"
+          },
+          "title": {
+            "type": "string",
+            "description": "公告标题"
+          },
+          "content": {
+            "type": "string",
+            "description": "公告的内容"
+          },
+          "created_at": {
+            "type": "integer",
+            "description": "创建时间"
+          },
+          "updated_at": {
+            "type": "integer",
+            "description": "更新时间"
+          },
+          "mode": {
+            "type": "integer",
+            "description": "0:默认 1:带跳转按钮"
+          },
+          "mode_data": {
+            "type": "string",
+            "description": "mode 相关数据"
+          }
+        },
+        "required": [
+          "notify_hash",
+          "event_hash",
+          "title",
+          "content",
+          "created_at",
+          "updated_at",
+          "mode",
+          "mode_data"
+        ],
+        "x-apifox-orders": [
+          "notify_hash",
+          "event_hash",
+          "title",
+          "content",
+          "created_at",
+          "updated_at",
+          "mode",
+          "mode_data"
+        ],
+        "x-apifox-ignore-properties": [],
+        "x-apifox-folder": ""
+      },
+      "PorschePrize": {
+        "type": "object",
+        "properties": {
+          "entity": {
+            "type": "string",
+            "description": "道具类型 (通常为luck)"
+          },
+          "entity_id": {
+            "type": "string",
+            "description": "奖品ID (对应luck表中的ID)"
+          },
+          "type_id": {
+            "type": "integer",
+            "description": "道具类别ID"
+          },
+          "prize_num": {
+            "type": "integer",
+            "description": "奖励个数"
+          },
+          "assets": {
+            "type": "object",
+            "properties": {
+              "en-US": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "道具简介"
+                  },
+                  "desc": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name",
+                  "desc"
+                ],
+                "x-apifox-orders": [
+                  "name",
+                  "desc"
+                ],
+                "description": "道具名称",
+                "x-apifox-ignore-properties": []
+              },
+              "zh-CN": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "道具名称"
+                  },
+                  "desc": {
+                    "type": "string",
+                    "description": "道具简介"
+                  }
+                },
+                "required": [
+                  "name",
+                  "desc"
+                ],
+                "x-apifox-orders": [
+                  "name",
+                  "desc"
+                ],
+                "x-apifox-ignore-properties": []
+              }
+            },
+            "required": [
+              "en-US",
+              "zh-CN"
+            ],
+            "x-apifox-orders": [
+              "en-US",
+              "zh-CN"
+            ],
+            "x-apifox-ignore-properties": []
+          },
+          "resource_path": {
+            "type": "string",
+            "description": "物品图标路径"
+          },
+          "resource_name": {
+            "type": "string",
+            "description": "图标名称"
+          },
+          "rare": {
+            "type": "integer",
+            "description": "物品稀有度 1-5个等级"
+          },
+          "locked": {
+            "type": "boolean",
+            "description": "是否锁定 true:锁定 false:未锁定"
+          },
+          "goods_id": {
+            "type": "string",
+            "description": "道具ID (对应goods表中的ID)"
+          }
+        },
+        "required": [
+          "entity",
+          "entity_id",
+          "type_id",
+          "prize_num",
+          "assets",
+          "resource_path",
+          "resource_name",
+          "rare",
+          "locked",
+          "goods_id"
+        ],
+        "x-apifox-orders": [
+          "entity",
+          "entity_id",
+          "type_id",
+          "prize_num",
+          "assets",
+          "resource_path",
+          "resource_name",
+          "rare",
+          "locked",
+          "goods_id"
+        ],
+        "title": "奖品详情",
+        "x-apifox-ignore-properties": [],
+        "x-apifox-folder": "web/game/lottery"
+      },
+      "UserOption": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "title": "",
+            "description": "标题，题目类型kind = accessory 时，此字段为文件原始名base64编码串"
+          },
+          "content": {
+            "type": "string",
+            "description": "用户填写答案实际内容"
+          }
+        },
+        "x-apifox-orders": [
+          "title",
+          "content"
+        ],
+        "required": [
+          "title",
+          "content"
+        ],
+        "x-apifox-ignore-properties": [],
+        "x-apifox-folder": "web/paycenter/survey"
+      },
+      "WorkshopDetail": {
+        "type": "object",
+        "properties": {
+          "host_kind": {
+            "type": "string",
+            "description": "workshop主持人类别 user-团队成员, event_guest-嘉宾类型(默认给个user)"
+          },
+          "host": {
+            "type": "string",
+            "description": "主持人哈希"
+          },
+          "ticket_asset": {
+            "type": "object",
+            "properties": {
+              "zh-CN": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "票种名称"
+                  }
+                },
+                "x-apifox-orders": [
+                  "name"
+                ],
+                "required": [
+                  "name"
+                ],
+                "x-apifox-ignore-properties": []
+              }
+            },
+            "x-apifox-orders": [
+              "zh-CN"
+            ],
+            "required": [
+              "zh-CN"
+            ],
+            "description": "多语言信息",
+            "x-apifox-ignore-properties": []
+          },
+          "ticket_type": {
+            "type": "integer",
+            "description": "门票(0-免费, 1-收费)"
+          },
+          "ticket_price": {
+            "type": "integer",
+            "description": "价格 分"
+          },
+          "ticket_currency": {
+            "type": "string",
+            "description": "币种(人民币-CNY, 美元-USD)"
+          },
+          "ticket_amount": {
+            "type": "integer",
+            "description": "数量"
+          },
+          "ticket_hash": {
+            "type": "string",
+            "description": "票种哈希"
+          }
+        },
+        "x-apifox-orders": [
+          "host_kind",
+          "host",
+          "ticket_asset",
+          "ticket_type",
+          "ticket_price",
+          "ticket_currency",
+          "ticket_amount",
+          "ticket_hash"
+        ],
+        "required": [
+          "host_kind",
+          "host",
+          "ticket_asset",
+          "ticket_type",
+          "ticket_price",
+          "ticket_currency",
+          "ticket_amount",
+          "ticket_hash"
+        ],
+        "x-apifox-ignore-properties": [],
+        "x-apifox-folder": "web/creation"
+      },
+      "全局success返回": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer"
+          },
+          "data": {
+            "type": "object",
+            "properties": {},
+            "x-apifox-ignore-properties": [],
+            "x-apifox-orders": []
+          },
+          "message": {
+            "type": "string"
+          },
+          "next": {
+            "type": "integer"
+          }
+        },
+        "x-apifox-orders": [
+          "code",
+          "data",
+          "message",
+          "next"
+        ],
+        "required": [
+          "code",
+          "data",
+          "message",
+          "next"
+        ],
+        "x-apifox-ignore-properties": [],
+        "x-apifox-folder": ""
+      },
+      "用户信息（标准）": {
+        "type": "object",
+        "properties": {
+          "user_id": {
+            "type": "integer",
+            "title": "用户ID"
+          },
+          "user_hash": {
+            "type": "string",
+            "title": "用户Hash"
+          },
+          "user_uid": {
+            "type": "string",
+            "title": "用户UUID"
+          },
+          "email": {
+            "type": "string",
+            "title": "邮箱"
+          },
+          "phone": {
+            "type": "string",
+            "title": "手机号"
+          },
+          "avatar": {
+            "type": "string",
+            "title": "头像"
+          },
+          "registered": {
+            "type": "string",
+            "title": "注册类型"
+          },
+          "asset": {
+            "type": "object",
+            "properties": {
+              "zh-CN": {
+                "type": "object",
+                "properties": {
+                  "i18n": {
+                    "type": "string",
+                    "title": "多语言"
+                  },
+                  "first_name": {
+                    "type": "string",
+                    "title": "名字"
+                  },
+                  "last_name": {
+                    "type": "string",
+                    "title": "姓"
+                  },
+                  "biography": {
+                    "type": "string",
+                    "title": "简介"
+                  },
+                  "company": {
+                    "type": "string",
+                    "title": "公司"
+                  },
+                  "department": {
+                    "type": "string",
+                    "title": "部门"
+                  },
+                  "job_title": {
+                    "type": "string",
+                    "title": "职位"
+                  },
+                  "country": {
+                    "type": "string",
+                    "title": "国际"
+                  },
+                  "linkedin_home": {
+                    "type": "string",
+                    "title": "领英主页"
+                  },
+                  "full_name": {
+                    "type": "string",
+                    "title": "名字组合"
+                  }
+                },
+                "required": [
+                  "i18n",
+                  "first_name",
+                  "last_name",
+                  "biography",
+                  "company",
+                  "department",
+                  "job_title",
+                  "country",
+                  "linkedin_home",
+                  "full_name"
+                ],
+                "x-apifox-orders": [
+                  "i18n",
+                  "first_name",
+                  "last_name",
+                  "biography",
+                  "company",
+                  "department",
+                  "job_title",
+                  "country",
+                  "linkedin_home",
+                  "full_name"
+                ],
+                "x-apifox-ignore-properties": []
+              }
+            },
+            "required": [
+              "zh-CN"
+            ],
+            "x-apifox-orders": [
+              "zh-CN"
+            ],
+            "title": "",
+            "x-apifox-ignore-properties": []
+          },
+          "idents": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "role": {
+                  "type": "integer",
+                  "title": "角色值"
+                },
+                "kind": {
+                  "type": "string",
+                  "title": "身份类型"
+                },
+                "title": {
+                  "type": "string",
+                  "title": "角色标签",
+                  "description": "speaker、organizer、host "
+                },
+                "theme": {
+                  "type": "integer",
+                  "title": "展示风格"
+                }
+              },
+              "required": [
+                "role",
+                "kind",
+                "title",
+                "theme"
+              ],
+              "x-apifox-orders": [
+                "role",
+                "kind",
+                "title",
+                "theme"
+              ],
+              "x-apifox-ignore-properties": []
+            },
+            "title": "角色信息"
+          },
+          "greetings": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "accid": {
+                  "type": "string",
+                  "title": "im账号ID",
+                  "description": "im账户id，目前和平台用户id一样"
+                },
+                "is_greeting": {
+                  "type": "integer",
+                  "title": "是否打招呼",
+                  "description": "0：未打招呼 1：互打"
+                }
+              },
+              "required": [
+                "accid",
+                "is_greeting"
+              ],
+              "x-apifox-orders": [
+                "accid",
+                "is_greeting"
+              ],
+              "x-apifox-ignore-properties": []
+            },
+            "title": "IM打招呼信息"
+          }
+        },
+        "required": [
+          "user_id",
+          "user_hash",
+          "user_uid",
+          "email",
+          "phone",
+          "avatar",
+          "registered",
+          "asset",
+          "idents",
+          "greetings"
+        ],
+        "x-apifox-orders": [
+          "user_id",
+          "user_hash",
+          "user_uid",
+          "email",
+          "phone",
+          "avatar",
+          "registered",
+          "asset",
+          "idents",
+          "greetings"
+        ],
+        "x-apifox-ignore-properties": [],
+        "x-apifox-folder": ""
+      },
+      "用户信息（精简）": {
+        "type": "object",
+        "properties": {
+          "user_id": {
+            "description": "userID",
+            "type": "integer"
+          },
+          "user_hash": {
+            "type": "string",
+            "description": "用户ID-Hash"
+          },
+          "avatar": {
+            "type": "string",
+            "description": "头像地址"
+          },
+          "first_name": {
+            "type": "string",
+            "description": "名字"
+          },
+          "last_name": {
+            "type": "string",
+            "description": "姓"
+          },
+          "job_title": {
+            "type": "string",
+            "description": "职位"
+          },
+          "company": {
+            "type": "string",
+            "description": "所属公司"
+          },
+          "role_kind": {
+            "type": "string",
+            "description": "身份类型 speaker、organizer、host、org、org_tem"
+          }
+        },
+        "x-apifox-orders": [
+          "user_id",
+          "user_hash",
+          "avatar",
+          "first_name",
+          "last_name",
+          "job_title",
+          "company",
+          "role_kind"
+        ],
+        "required": [
+          "user_id",
+          "user_hash",
+          "avatar",
+          "first_name",
+          "last_name",
+          "job_title",
+          "company",
+          "role_kind"
+        ],
+        "x-apifox-ignore-properties": [],
+        "x-apifox-folder": ""
+      }
+    }
+  }
+}
