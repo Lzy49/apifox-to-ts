@@ -1,5 +1,5 @@
 import minimist from 'minimist'
-import { red } from "kolorist";
+import { green, red } from "kolorist";
 import { getPathWithFilePath, hasPath, readJSON, write } from './utils'
 import axios from 'axios';
 const URLS: string[] = ['https://gotin-test.oss-accelerate.aliyuncs.com/', 'https://gotin-test.oss-accelerate.aliyuncs.com'].map((item: string) => item.endsWith('/') ? item.substring(0, item.length - 1) : item)
@@ -11,6 +11,7 @@ async function init() {
     write(getPathWithFilePath(process.cwd(), PATH + 'apifox.json'), JSON.stringify(context, null, 2));
     hadleTypes(context);
     hadleConfig(context)
+    console.log(green("✔") + "添加成功");
   } catch (error: any) {
     console.log(red("✖") + " " + error.message);
   }
@@ -28,15 +29,11 @@ function handleArgv() {
 }
 
 async function getJSON() {
-  const server = await getServer()
-  console.log('%c------------ start [] -------------', 'color:purple');
-  console.log(server);
-  console.log('%c------------ end [] ---------------', 'color:purple');
-
-  if (getLocal() === 'nodata') {
-    return server
+  const server = await getServer();
+  if (getLocal() === "nodata") {
+    return server;
   }
-  const local = getLocal()
+  const local = getLocal();
   const result = {
     openapi: server.openapi,
     info: server.info,
@@ -44,57 +41,58 @@ async function getJSON() {
     components: {
       schemas: getComponents()
     }
-  }
-  return result
+  };
+  return result;
   function getComponents() {
-    const keys = Object.keys({ ...server.components.schemas, ...local.components.schemas }).sort()
-    return keys.reduce((result, key) => {
-      result[key] = server.components.schemas[key] || local.components.schemas[key]
-      return result
-    }, {})
+    const keys = Object.keys({ ...server.components.schemas, ...local.components.schemas }).sort();
+    return keys.reduce((result2, key) => {
+      result2[key] = server.components.schemas[key] || local.components.schemas[key];
+      return result2;
+    }, {});
   }
   function getPaths() {
-    const keys = Object.keys({ ...server.paths, ...local.paths }).sort()
-    return keys.reduce((result, key) => {
-      const keys = [...Object.keys(server.paths[key] || {}), ...Object.keys(local.paths[key] || {})].sort();
-      const value = keys.reduce((res, k) => (
-        { ...res, [k]: server?.paths?.[key]?.[k] || local?.paths?.[key]?.[k] }
-      ), {});
-      return { ...result, [key]: value };
+    const keys = Object.keys({ ...server.paths, ...local.paths }).sort();
+    return keys.reduce((result2, key) => {
+      const keys2 = [...Object.keys(server.paths[key] || {}), ...Object.keys(local.paths[key] || {})].sort();
+      const value = keys2.reduce((res, k) => ({ ...res, [k]: server?.paths?.[key]?.[k] || local?.paths?.[key]?.[k] }), {});
+      return { ...result2, [key]: value };
     }, {});
   }
   function getLocal() {
-    const p = getPathWithFilePath(process.cwd(), PATH + 'apifox.json')
-    return hasPath(p) ? readJSON(p) : 'nodata';
+    const p = getPathWithFilePath(process.cwd(), PATH + "apifox.json");
+    return hasPath(p) ? readJSON(p) : "nodata";
   }
   async function getServer() {
     const { path, type } = handleArgv();
-    const server = (await axios.get(path)).data
-    const paths = Object.keys(server.paths).reduce((result, key) => {
-      const method = Object.keys(server.paths[key])
+    const server2 = (await axios.get(path)).data;
+    const paths = Object.keys(server2.paths).reduce((result2, key) => {
+      const method = Object.keys(server2.paths[key]);
       return {
-        ...result, [key]: method.reduce((result, k) => {
-          const item = { ...server.paths[key][k], baseURL: URLS[type] }
-          return { ...result, [k]: item }
+        ...result2,
+        [key]: method.reduce((result3, k) => {
+          const item = { ...server2.paths[key][k], baseURL: URLS[type] };
+          return { ...result3, [k]: item };
         }, {})
-      }
-    }, {})
-    return { ...server, paths }
+      };
+    }, {});
+    return { ...server2, paths };
   }
 }
-function hadleConfig(context: any) {
-  let result = `export default {`
+function hadleConfig(context) {
+  let result = `export default {`;
   for (const path in context.paths) {
-    Object.keys(context.paths[path]).forEach(method => {
-      const baseURL = context.paths[path][method].baseURL
+    Object.keys(context.paths[path]).forEach((method) => {
+      let mock = context.paths[path][method].responses['200']?.content?.['application/json']?.examples?.['1']?.value?.data
+      const baseURL = context.paths[path][method].baseURL;
       result += `'${path},${method}':{
         url:${baseURL} + '${path}',
         method:'${method}',
-      },`
-    })
+        mock:${JSON.stringify(mock, null, 2)}
+      },`;
+    });
   }
-  result += '}'
-  write(getPathWithFilePath(process.cwd(), PATH + 'api-url.ts'), result);
+  result += "}";
+  write(getPathWithFilePath(process.cwd(), PATH + "api-url.ts"), result);
 }
 function hadleTypes(context: any) {
   let result = handleContext(context);

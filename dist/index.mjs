@@ -1,5 +1,5 @@
 import minimist from 'minimist';
-import { red } from 'kolorist';
+import { green, red } from 'kolorist';
 import fs from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
@@ -33,6 +33,7 @@ async function init() {
     write(getPathWithFilePath(process.cwd(), PATH + "apifox.json"), JSON.stringify(context, null, 2));
     hadleTypes(context);
     hadleConfig(context);
+    console.log(green("\u2714") + "\u6DFB\u52A0\u6210\u529F");
   } catch (error) {
     console.log(red("\u2716") + " " + error.message);
   }
@@ -51,9 +52,6 @@ function handleArgv() {
 }
 async function getJSON() {
   const server = await getServer();
-  console.log("%c------------ start [] -------------", "color:purple");
-  console.log(server);
-  console.log("%c------------ end [] ---------------", "color:purple");
   if (getLocal() === "nodata") {
     return server;
   }
@@ -106,10 +104,12 @@ function hadleConfig(context) {
   let result = `export default {`;
   for (const path in context.paths) {
     Object.keys(context.paths[path]).forEach((method) => {
+      let mock = context.paths[path][method].responses["200"]?.content?.["application/json"]?.examples?.["1"]?.value?.data;
       const baseURL = context.paths[path][method].baseURL;
       result += `'${path},${method}':{
         url:${baseURL} + '${path}',
         method:'${method}',
+        mock:${JSON.stringify(mock, null, 2)}
       },`;
     });
   }
